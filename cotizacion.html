@@ -50,10 +50,18 @@ tfoot td{padding:10px 8px;font-weight:700;border-top:2px solid var(--carambola);
   .header img{height:90px;}
   .section{padding:16px;}
   .form-grid{grid-template-columns:1fr;}
-  table{font-size:0.78rem;}
-  thead th,tbody td,tfoot td{padding:6px 5px;}
   .qty-input{width:48px;}
   .btn{flex:1;justify-content:center;padding:12px 10px;font-size:0.82rem;}
+  table,thead,tbody,tfoot,tr{display:block;width:100%;}
+  thead{display:none;}
+  tbody tr{border:1px solid var(--carambola);border-radius:10px;margin-bottom:10px;padding:10px;background:white!important;}
+  tbody tr:nth-child(even){background:var(--papel)!important;}
+  tbody td{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:5px 0;text-align:right;}
+  tbody td:first-child{display:block;text-align:left;padding-bottom:8px;margin-bottom:6px;border-bottom:1px solid var(--carambola);}
+  tbody td:not(:first-child)::before{content:attr(data-label);font-weight:700;font-size:0.68rem;text-transform:uppercase;color:var(--tinta-suave);flex-shrink:0;}
+  tfoot tr{display:flex;justify-content:space-between;align-items:center;padding:10px 4px;border-top:2px solid var(--carambola);}
+  tfoot td{border:none;padding:0;}
+  tfoot td[colspan]{display:none;}
 }
 </style>
 </head>
@@ -160,10 +168,10 @@ function render(){
     tr.innerHTML='<td><span class="cat">'+getCat(p.nombre)+'</span><br><strong>'+p.sabor+'</strong>'
       +(esGranel?'<br><span class="granel-note">Precio por kg, sin descuento por volumen</span>':'')
       +'<br><span style="font-size:0.78rem;color:var(--tinta-suave)">'+p.nombre+'</span></td>'
-      +'<td style="font-family:monospace;font-size:0.78rem">'+p.id+'</td>'
-      +'<td style="text-align:center"><input class="qty-input" type="number" min="0" value="'+p.qty+'" onchange="upd('+i+',this.value)"><br><span style="font-size:0.7rem;color:var(--tinta-suave)">'+unidad+'</span></td>'
-      +'<td class="pc">$'+pr+'</td>'
-      +'<td class="sc">'+(sub>0?'$'+sub.toLocaleString('es-MX'):'&#8212;')+'</td>';
+      +'<td data-label="SKU" style="font-family:monospace;font-size:0.78rem">'+p.id+'</td>'
+      +'<td data-label="Cantidad" style="text-align:center"><input class="qty-input" type="number" min="0" value="'+p.qty+'" onchange="upd('+i+',this.value)"><br><span style="font-size:0.7rem;color:var(--tinta-suave)">'+unidad+'</span></td>'
+      +'<td data-label="Precio unit." class="pc">$'+pr+'</td>'
+      +'<td data-label="Subtotal" class="sc">'+(sub>0?'$'+sub.toLocaleString('es-MX'):'&#8212;')+'</td>';
     tb.appendChild(tr);
   });
   document.getElementById('total').textContent='$'+total.toLocaleString('es-MX',{minimumFractionDigits:2});
