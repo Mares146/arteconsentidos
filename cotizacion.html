@@ -100,7 +100,13 @@ tfoot td{padding:10px 8px;font-weight:700;border-top:2px solid var(--carambola);
   <h2>Productos</h2>
   <div class="table-wrap">
   <table>
-    <thead><tr><th>Producto</th><th>SKU</th><th style="text-align:center">Cantidad</th><th style="text-align:right">Precio Unit.</th><th style="text-align:right">Subtotal</th></tr></thead>
+    <thead><tr>
+      <th>Producto</th>
+      <th>SKU</th>
+      <th style="text-align:center">Cantidad</th>
+      <th style="text-align:right">Precio Unit.</th>
+      <th style="text-align:right">Subtotal</th>
+    </tr></thead>
     <tbody id="tbody"></tbody>
     <tfoot><tr><td colspan="3"></td><td class="tl">TOTAL:</td><td class="tv" id="total">$0.00</td></tr></tfoot>
   </table>
@@ -134,6 +140,7 @@ var prods = [
   {id:"ACSCNUEZ00",nombre:"Crema 220g",sabor:"Nuez de Castilla",p1:130,p37:120,p121:110,qty:0},
   {id:"ACSCALM00",nombre:"Crema 220g",sabor:"Almendras",p1:130,p37:120,p121:110,qty:0},
   {id:"ACSCCH00",nombre:"Crema 220g",sabor:"Cacahuate",p1:115,p37:106,p121:97,qty:0},
+  {id:"ACSAULR00",nombre:"Aceite 170ml",sabor:"Romero y Lavanda",p1:145,p37:130,p121:114,qty:0},
 ];
 document.getElementById('cfecha').value = new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'2-digit',year:'numeric'});
 
@@ -146,6 +153,7 @@ function getPrecio(p,q){
 function getCat(n){
   if(n.indexOf('Mermelada')>=0) return 'Mermelada';
   if(n.indexOf('Salsa')>=0||n.indexOf('kg')>=0) return 'Salsa';
+  if(n.indexOf('Aceite')>=0) return 'Aceite';
   return 'Crema';
 }
 function getUnidad(p){
